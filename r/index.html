@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Debate Coach: your code</title>
+<meta name="description" content="Open Debate Coach with the code you were given.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0e7a70">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#fbfaf7;--ink:#17181c;--muted:#5c5e66;--line:#e6e4dd;--go:#0e7a70;--go-text:#0b5e56;--on-go:#ffffff;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17181c;--ink:#f4f3f0;--muted:#b3b1ab;--line:#2f3038;--go:#0e7a70;--go-text:#5fd3c3;--on-go:#ffffff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17181c;--ink:#f4f3f0;--muted:#b3b1ab;--line:#2f3038;--go:#0e7a70;--go-text:#5fd3c3;--on-go:#ffffff;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;margin:0;font-size:18px;line-height:1.55}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+h1{font-size:30px;letter-spacing:-.02em;text-wrap:balance;margin:0 0 8px}
+p{margin:10px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:20px;text-decoration:none;color:var(--ink);margin-bottom:28px;min-height:44px}
+.brand img{width:28px;height:28px}
+.code{font-family:"Spline Sans Mono",ui-monospace,monospace;font-size:36px;letter-spacing:.12em;border:2px solid var(--line);border-radius:16px;padding:14px 18px;text-align:center;margin:18px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:14px;font:inherit;font-weight:700;text-decoration:none;cursor:pointer;border:2px solid var(--go);background:var(--go);color:var(--on-go)}
+.btn.ghost{background:transparent;color:var(--go-text)}
+.muted{color:var(--muted);font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="brand" href="../"><img src="../favicon.svg" alt="">Debate Coach</a>
+<h1>Your code for Debate Coach</h1>
+<p id="lead">Open the app and the code is added for you. On a new phone, install the app first, then add the code under You, Share Debate Coach, before your first paid month.</p>
+<div class="code" id="code" aria-live="polite">&nbsp;</div>
+<div class="row">
+<a class="btn" id="open" href="debatecoach://">Open in the app</a>
+<button class="btn ghost" id="copy" type="button">Copy code</button>
+</div>
+<p class="muted" id="note">A friend's code gives you 5 bonus credits with your first paid monthly subscription. A partner's code adds no further discount; the partner may earn a commission if you subscribe. Only one code applies to a subscription.</p>
+</div>
+<script>
+(function () {
+  var raw = new URLSearchParams(location.search).get('c') || '';
+  var code = raw.trim().toUpperCase();
+  if (!/^[A-Z0-9-]{3,24}$/.test(code)) {
+    document.getElementById('code').textContent = 'No code';
+    document.getElementById('open').setAttribute('href', 'debatecoach://');
+    return;
+  }
+  document.getElementById('code').textContent = code;
+  document.getElementById('open').setAttribute('href', 'debatecoach://r/' + encodeURIComponent(code));
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    if (navigator.clipboard) navigator.clipboard.writeText(code).then(function () { copy.textContent = 'Copied'; }, function () {});
+  });
+})();
+</script>
+</body>
+</html>
